@@ -1,0 +1,130 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('vinedos.webp') no-repeat center center fixed;
+  background-size: cover;
+  color: #3d2b1f;
+  text-align: center;
+}
+
+/* Capa oscura más intensa */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3); /* filtro más neutro */
+  z-index: 0;
+  backdrop-filter: brightness(1.00) contrast(1.15); /* apenas modificamos el color */
+}
+
+/* Todo el contenido va por encima del fondo */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* MENSAJE INICIAL DESTACADO */
+.intro-text {
+  margin: 2.5em auto 13em auto;
+  width: 80%;
+  max-width: 900px;
+  font-size: 1.1em; /* más pequeño */
+  font-weight: bold;
+  color: #3d2b1f;
+  background: rgba(255, 253, 251, 0.9);
+  padding: 0.8em 1em; /* menos espacio interior */
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #decbaa;
+}
+
+
+/* Contenedor centrado del textarea + botón */
+.chat-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
+  margin-top: 0;
+}
+
+/* Área de texto */
+textarea {
+  width: 80%;
+  max-width: 600px;
+  height: 120px;
+  padding: 1em;
+  border: 1px solid #e6d4b2;
+  border-radius: 15px;
+  background-color: #ffffff;
+  color: #3d2b1f;
+  resize: vertical;
+  font-size: 1em;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.05);
+}
+
+/* Botón refinado */
+button {
+  padding: 0.8em 1.5em;
+  background-color: #90caf9; /* azul claro */
+  color: #000000; /* texto negro */
+  border: 2px solid #42a5f5; /* borde azul más intenso */
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05), 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: #64b5f6; /* azul un poco más fuerte al pasar el ratón */
+  border-color: #2196f3;
+  color: #000000;
+  transform: scale(1.04);
+}
+
+
+/* Área de respuesta del chatbot */
+#resultado {
+  display: none; /* oculto al cargar */
+  max-height: 400px;
+  overflow-y: auto;
+  background: #ffffff;
+  color: #3d2b1f;
+  padding: 1.2em;
+  margin: 2em auto;
+  border-left: 5px solid #d6ba85;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 800px;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.06);
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+
+.pensando-box {
+  display: none;
+  background-color: #ffffff;
+  color: #3d2b1f;
+  padding: 0.8em 1.2em;
+  margin-top: 1em;
+  border: 1px solid #decbaa;
+  border-radius: 12px;
+  font-style: italic;
+  font-size: 0.95em;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+  max-width: 500px;
+  width: 80%;
+  text-align: center;
+}
+
+#enlace-encuesta {
+  margin: -1em auto 3em auto;
+  text-align: center;
+}
