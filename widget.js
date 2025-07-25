@@ -1,6 +1,6 @@
 (function () {
   const iframe = document.createElement("iframe");
-  iframe.src = "https://e8a9da9a-236a-4d97-bb37-80602ac828c2-00-2zzgb31fefkz.picard.replit.dev/";
+  iframe.src = "https://widget-rag.vercel.app";
   iframe.style.position = "fixed";
   iframe.style.bottom = "20px";
   iframe.style.right = "20px";
