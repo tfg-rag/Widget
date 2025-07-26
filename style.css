@@ -1,77 +1,65 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #faf9f6;
-  color: #2c2c2c;
-}
-
-body::before {
-  content: "";
+/* CONTENEDOR DEL WIDGET */
+.widget-container {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 280px;
-  background: url('barricas.jpg') no-repeat center center;
-  background-size: cover;
-  z-index: -1;
-  filter: brightness(0.6);
+  bottom: 30px;
+  right: 30px;
+  width: 360px;
+  max-width: 90%;
+  z-index: 9999;
+  font-family: 'Segoe UI', sans-serif;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  background: #fff;
+  border: 1px solid #e0dcd8;
 }
 
-body > * {
-  position: relative;
-  z-index: 1;
-}
-
+/* CABECERA DEL MENSAJE DE BIENVENIDA */
 .intro-text {
-  margin: 0 auto;
-  padding: 4em 2em 2em 2em;
-  background-color: rgba(255, 255, 255, 0.95);
-  width: 90%;
-  max-width: 1000px;
-  text-align: left;
-  font-size: 1.15em;
-  font-weight: normal;
-  color: #222;
-  border-bottom: 2px solid #ccc;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  padding: 1.4em 1.6em 1em 1.6em;
+  background-color: #ffffff;
+  color: #333;
+  font-size: 1.05em;
+  border-bottom: 1px solid #f1efeb;
 }
 
+/* ÁREA DEL INPUT Y BOTÓN */
 .chat-input {
+  padding: 1em 1.6em 1.4em 1.6em;
+  background-color: #fcfaf9;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 3em 0;
+  gap: 1em;
 }
 
+/* CAMPO DE TEXTO */
 textarea {
-  width: 90%;
-  max-width: 700px;
-  height: 130px;
-  padding: 1em;
-  border: 1px solid #bbb;
+  width: 100%;
+  height: 100px;
+  padding: 0.9em;
   border-radius: 10px;
+  border: 1px solid #ccc;
   font-size: 1em;
-  background: #fff;
-  color: #333;
   resize: vertical;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  color: #333;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
 }
 
+/* BOTÓN */
 button {
-  margin-top: 1em;
-  padding: 0.8em 2.2em;
+  align-self: flex-end;
   background-color: #941b1b;
   color: #fff;
   border: none;
+  padding: 0.65em 1.8em;
   border-radius: 8px;
-  font-weight: bold;
   font-size: 1em;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
@@ -79,43 +67,39 @@ button:hover {
   transform: scale(1.03);
 }
 
+/* RESPUESTA DEL CHATBOT */
 #resultado {
   display: none;
-  background: #ffffff;
+  background-color: #fdfdfd;
   color: #2c2c2c;
-  padding: 1.6em;
-  margin: 3em auto;
-  width: 90%;
-  max-width: 900px;
-  border-left: 6px solid #941b1b;
-  border-radius: 8px;
-  font-size: 1em;
-  line-height: 1.6;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  padding: 1em 1.6em;
+  border-top: 1px solid #f1efeb;
+  font-size: 0.95em;
+  line-height: 1.5;
   text-align: left;
 }
 
+/* CUADRO DE PENSANDO */
 .pensando-box {
   display: none;
-  background-color: #f2f2f2;
-  color: #4a4a4a;
-  padding: 1em;
-  margin-top: 1.2em;
-  border-left: 4px solid #aaa;
-  border-radius: 6px;
+  background-color: #f4f4f4;
+  color: #666;
+  padding: 0.8em 1.2em;
   font-style: italic;
   font-size: 0.95em;
-  width: 90%;
-  max-width: 600px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  text-align: left;
+  border-left: 4px solid #ccc;
+  border-radius: 6px;
+  margin-top: 0.8em;
 }
 
+/* ENLACE ENCUESTA */
 #enlace-encuesta {
-  margin: 2em auto;
+  margin-top: 1em;
   text-align: center;
-  font-size: 0.95em;
+  font-size: 0.85em;
+  color: #666;
 }
+
 
 
 
