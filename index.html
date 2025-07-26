@@ -2,30 +2,27 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Demo de Webhooks con n8n</title>
+  <title>Asistente Marco de Jerez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="widget-root">
+    <div class="intro-text">
+      ¡Buenas! Soy tu asistente personal sobre el Marco de Jerez de la Frontera.<br><br>
+      ¿Qué te gustaría saber?
+    </div>
 
-  <div class="intro-text">
-    ¡Buenas! Soy tu asistente personal sobre el Marco de Jerez de la Frontera.<br><br>
-    ¿Qué te gustaría saber?
+    <div id="resultado"></div>
+
+    <div class="chat-input">
+      <textarea id="userMessage" placeholder="Escribe tu pregunta..." rows="6" cols="50"></textarea>
+      <button onclick="enviarWebhook()">Enviar</button>
+      <div id="pensando" class="pensando-box"></div>
+      <div id="enlace-encuesta"></div>
+    </div>
   </div>
-
-  <div class="chat-input">
-    <textarea id="userMessage" placeholder="Escribe tu pregunta..." rows="6" cols="50"></textarea>
-    <button onclick="enviarWebhook()">Enviar</button>
-    <div id="pensando" class="pensando-box"></div>
-  </div>
-
-  <div id="resultado"></div>
-  <div id="enlace-encuesta"></div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
