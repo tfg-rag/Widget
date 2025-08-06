@@ -27,7 +27,7 @@ async function enviarWebhook() {
   }, 3000); 
 
   try {
-    const response = await fetch("http://a22.uca.es:5678/webhook/rag-widget", {
+    const response = await fetch("https://171394436571.ngrok-free.app/webhook/rag-widget", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
