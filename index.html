@@ -13,14 +13,15 @@
       ¿Qué te gustaría saber?
     </div>
 
-    <div id="pregunta-usuario" class="bubble user" style="display:none;"></div>
+    <div id="pregunta-usuario" class="pregunta-box"></div>
 
-    <div id="resultado" class="bubble ai"></div>
+    <div id="pensando" class="pensando-box"></div>
+
+    <div id="resultado"></div>
 
     <div class="chat-input">
       <textarea id="userMessage" placeholder="Escribe tu pregunta..." rows="5" cols="50"></textarea>
       <button id="enviar" onclick="enviarWebhook()">Enviar</button>
-      <div id="pensando" class="pensando-box" style="display:none;"></div>
       <div id="enlace-encuesta"></div>
     </div>
   </div>
@@ -28,4 +29,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
