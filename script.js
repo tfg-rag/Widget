@@ -1,132 +1,91 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #ffffff;
-  color: #2c2c2c;
+const frasesPensando = [
+  "🛢️ Abriendo la solera...",
+  "🍇 Catando el vino...",
+  "🍷 Decantando la mejor respuesta..."
+];
+
+let pensandoInterval;
+
+function sanitizar(texto) {
+  const div = document.createElement('div');
+  div.textContent = texto;
+  return div.innerHTML;
 }
 
-html, body {
-  height: 100%;
-}
+async function enviarWebhook() {
+  const textarea = document.getElementById('userMessage');
+  const mensajeRaw = textarea.value.trim();
+  if (!mensajeRaw) return;
 
-#widget-root {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  const mensaje = mensajeRaw;
+  const intro = document.getElementById('intro');
+  const pensando = document.getElementById('pensando');
+  const resultado = document.getElementById('resultado');
+  const encuesta = document.getElementById('enlace-encuesta');
+  const pregunta = document.getElementById('pregunta-usuario');
+  const boton = document.getElementById('enviar');
 
-.widget-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; 
-}
+  boton.disabled = true;
+  encuesta.innerHTML = "";
+  resultado.style.display = "none";
+  resultado.innerHTML = "";
 
-.intro-text {
-  padding: 1.6em 1.6em 1em 1.6em;
-  background-color: #ffffff;
-  color: #2d2d2d;
-  font-size: 1.1em;
-  line-height: 1.6;
-  border-bottom: 1px solid #f1efeb;
-  text-align: left;
-  margin-bottom: 0.5em; 
-}
+  intro.style.display = "none";
+  pregunta.style.display = "block";
+  pregunta.textContent = mensaje;
 
-.pregunta-box {
-  display: none;
-  background-color: #f4f4f4;
-  color: #666;
-  padding: 0.8em 1.2em;
-  font-size: 0.95em;
-  border-left: 4px solid #ccc;
-  border-radius: 6px;
-  margin-top: 0.8em;
-}
+  let index = 0;
+  pensando.style.display = "block";
+  pensando.innerHTML = `
+    <span class="educado">Por favor, mantente a la espera. Disculpa la demora.</span>
+    <span id="frase-rotatoria" class="frase"></span>
+  `;
+  const rotatoria = document.getElementById('frase-rotatoria');
+  rotatoria.textContent = frasesPensando[index];
 
-#resultado {
-  display: none;
-  background-color: #fdfdfd;
-  color: #2c2c2c;
-  padding: 1.2em 1.6em;
-  font-size: 0.95em;
-  line-height: 1.5;
-  border-top: 1px solid #f2f2f2;
-  text-align: left;
-  overflow-y: auto;
-  max-height: 300px; 
-}
+  pensandoInterval = setInterval(() => {
+    index = (index + 1) % frasesPensando.length;
+    rotatoria.textContent = frasesPensando[index];
+  }, 6000);
 
-.chat-input {
-  padding: 1.2em 1.6em 1.6em 1.6em;
-  background-color: #faf9f7;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
+  try {
+    const response = await fetch("https://1b80220eed45.ngrok-free.app/webhook/rag-widget", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chatInput: mensaje,
+        sessionId: "12345"
+      })
+    });
 
-textarea {
-  width: 100%;
-  height: 100px;
-  padding: 0.9em 1em;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 1em;
-  resize: vertical;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fff;
-  color: #333;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
-}
+    const rawText = await response.text();
 
-button {
-  align-self: flex-end;
-  background-color: #941b1b;
-  color: #fff;
-  border: none;
-  padding: 0.65em 1.8em;
-  border-radius: 8px;
-  font-size: 1em;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
+    clearInterval(pensandoInterval);
+    pensandoInterval = null;
+    pensando.innerHTML = "";
+    pensando.style.display = "none";
 
-button:hover {
-  background-color: #7a1515;
-  transform: scale(1.03);
-}
+    const safe = sanitizar(rawText).replace(/\n/g, "<br>");
+    resultado.innerHTML = safe;
+    resultado.style.display = "block";
 
-.pensando-box {
-  display: none;
-  background-color: #f4f4f4;
-  color: #666;
-  padding: 0.8em 1.2em;
-  font-size: 0.95em;
-  border-left: 4px solid #ccc;
-  border-radius: 6px;
-  margin-top: 0.8em;
-}
+    const enlaceEncuesta = `
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSffcgLsrBfUkZ2xY5amLMbb-CyKKzkSMQbx1Xsgrde0zZwP7Q/viewform?usp=dialog" target="_blank">
+        Déjanos tu opinión completando esta encuesta
+      </a>
+    `;
+    encuesta.innerHTML = enlaceEncuesta;
 
-.pensando-box .educado {
-  display: block;
-  font-style: normal;
-  font-weight: 500;
-  margin-bottom: 0.4em;
-  color: #444;
-}
+  } catch (error) {
+    clearInterval(pensandoInterval);
+    pensandoInterval = null;
+    pensando.innerHTML = "";
+    pensando.style.display = "none";
 
-.pensando-box .frase {
-  font-style: italic;
-  color: #666;
-}
-
-#enlace-encuesta {
-  margin-top: 1em;
-  text-align: center;
-  font-size: 0.85em;
-  color: #666;
+    resultado.textContent = "Error: " + error.message;
+    resultado.style.display = "block";
+  } finally {
+    boton.disabled = false;
+    textarea.value = "";
+  }
 }
