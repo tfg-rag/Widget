@@ -24,7 +24,7 @@ async function enviarWebhook() {
   pensandoInterval = setInterval(() => {
     index = (index + 1) % frasesPensando.length;
     pensando.innerText = frasesPensando[index];
-  }, 3000); 
+  }, 6000); 
 
   try {
     const response = await fetch("https://1b80220eed45.ngrok-free.app/webhook/rag-widget", {
