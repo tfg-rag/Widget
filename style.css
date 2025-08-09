@@ -111,7 +111,7 @@ button:hover {
   font-size: 0.95em;
   border-left: 4px solid #ccc;
   border-radius: 6px;
-  margin: 0.8em 1.6em 0 1.6em;
+  margin: 0.3em 1.6em 0 1.6em; 
 }
 
 .pensando-box .educado {
@@ -133,3 +133,4 @@ button:hover {
   font-size: 0.85em;
   color: #666;
 }
+
