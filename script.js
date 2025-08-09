@@ -1,4 +1,3 @@
-// Frases temáticas de espera
 const frasesPensando = [
   "🛢️ Abriendo la solera...",
   "🍇 Catando el vino...",
@@ -7,59 +6,79 @@ const frasesPensando = [
 
 let pensandoInterval;
 
+function sanitizar(texto) {
+  const div = document.createElement('div');
+  div.textContent = texto;
+  return div.innerHTML;
+}
+
 async function enviarWebhook() {
-  const mensaje = document.getElementById('userMessage').value;
+  const textarea = document.getElementById('userMessage');
+  const mensajeRaw = textarea.value.trim();
+  if (!mensajeRaw) return;
+
+  const mensaje = mensajeRaw;
+  const intro = document.getElementById('intro');
   const pensando = document.getElementById('pensando');
   const resultado = document.getElementById('resultado');
   const encuesta = document.getElementById('enlace-encuesta');
+  const pregunta = document.getElementById('pregunta-usuario');
+  const boton = document.getElementById('enviar');
 
+  boton.disabled = true;
+  encuesta.innerHTML = "";
   resultado.style.display = "none";
   resultado.innerHTML = "";
-  encuesta.innerHTML = "";
-  pensando.style.display = "block";
 
-  // Inicia rotación de frases
+  intro.style.display = "none";
+  pregunta.style.display = "block";
+  pregunta.innerText = mensaje;
+
+  pensando.style.display = "block";
   let index = 0;
-  pensando.innerText = frasesPensando[index];
+  pensando.innerHTML = `
+    <span class="educado">Por favor, mantente a la espera. Disculpa la demora.</span>
+    <span id="frase-rotatoria"></span>
+  `;
+  const rotatoria = document.getElementById('frase-rotatoria');
+  rotatoria.innerText = frasesPensando[index];
+
   pensandoInterval = setInterval(() => {
     index = (index + 1) % frasesPensando.length;
-    pensando.innerText = frasesPensando[index];
-  }, 6000); 
+    rotatoria.innerText = frasesPensando[index];
+  }, 6000);
 
   try {
     const response = await fetch("https://1b80220eed45.ngrok-free.app/webhook/rag-widget", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chatInput: mensaje,
         sessionId: "12345"
       })
     });
 
-    const data = await response.text();
+    const rawText = await response.text();
 
-    resultado.innerHTML = data.replace(/\n/g, '<br>');
+    const safe = sanitizar(rawText).replace(/\n/g, "<br>");
+    resultado.innerHTML = safe;
     resultado.style.display = "block";
 
     const enlaceEncuesta = `
-      <div style="margin-top: 1.5em;">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSffcgLsrBfUkZ2xY5amLMbb-CyKKzkSMQbx1Xsgrde0zZwP7Q/viewform?usp=dialog" 
-           target="_blank"
-           style="background-color: #ffeecc; padding: 0.8em 1.2em; text-decoration: none; color: #3d2b1f; border-radius: 10px; font-weight: 600; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">
-           Déjanos tu opinión completando la siguiente encuesta:
-        </a>
-      </div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSffcgLsrBfUkZ2xY5amLMbb-CyKKzkSMQbx1Xsgrde0zZwP7Q/viewform?usp=dialog" target="_blank">
+        Déjanos tu opinión completando esta encuesta
+      </a>
     `;
     encuesta.innerHTML = enlaceEncuesta;
 
   } catch (error) {
-    resultado.innerText = 'Error: ' + error.message;
+    resultado.innerText = "Error: " + error.message;
     resultado.style.display = "block";
   } finally {
     clearInterval(pensandoInterval);
-    pensando.innerText = "";
+    pensando.innerHTML = "";
     pensando.style.display = "none";
+    boton.disabled = false;
+    textarea.value = "";
   }
 }
