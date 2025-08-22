@@ -68,6 +68,7 @@ async function enviarWebhook() {
     const safe = sanitizar(rawText).replace(/\n/g, "<br>");
     resultado.innerHTML = safe;
     resultado.style.display = "block";
+    pregunta.textContent = "La información devuelta es posible que esté desactualizada a día de hoy";
 
     const enlaceEncuesta = `
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSffcgLsrBfUkZ2xY5amLMbb-CyKKzkSMQbx1Xsgrde0zZwP7Q/viewform?usp=dialog" target="_blank">
@@ -89,3 +90,4 @@ async function enviarWebhook() {
     textarea.value = "";
   }
 }
+
