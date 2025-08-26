@@ -65,7 +65,7 @@ html, body {
 
 .chat-input {
   padding: 1.2em 1.6em 1.6em 1.6em;
-  background-color: #faf9f7;
+  background-color: #f0edea;
   display: flex;
   flex-direction: column;
   gap: 1em;
