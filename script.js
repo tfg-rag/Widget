@@ -49,12 +49,11 @@ async function enviarWebhook() {
   }, 6000);
 
   try {
-    const response = await fetch("https://1b80220eed45.ngrok-free.app/webhook/rag-widget", {
+    const response = await fetch("https://widget-rag.vercel.app/api/ask", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "header": "MI_SECRET_HEADER"
-      },
+        "Content-Type": "application/json"
+        },
       body: JSON.stringify({
         chatInput: mensaje,
         sessionId: "12345"
