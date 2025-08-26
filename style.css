@@ -138,3 +138,39 @@ button:hover {
   font-size: 0.85em;
   color: #666;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+#widget-root {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 8px 16px 16px;
+}
+
+.intro-text,
+.pregunta-box,
+#resultado,
+.pensando-box,
+.chat-input {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+textarea#userMessage {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 420px) {
+  #widget-root {
+    padding-left: 12px;
+    padding-right: 12px;
+    max-width: calc(100vw - 24px);
+  }
+}
