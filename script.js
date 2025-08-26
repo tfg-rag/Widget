@@ -51,7 +51,10 @@ async function enviarWebhook() {
   try {
     const response = await fetch("https://1b80220eed45.ngrok-free.app/webhook/rag-widget", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "header": "MI_SECRET_HEADER"
+      },
       body: JSON.stringify({
         chatInput: mensaje,
         sessionId: "12345"
