@@ -47,7 +47,7 @@ async function enviarWebhook() {
   pensandoInterval = setInterval(() => {
     index = (index + 1) % frasesPensando.length;
     rotatoria.textContent = frasesPensando[index];
-  }, 6000);
+  }, 4000);
 
   try {
     const response = await fetch("https://widget-rag.vercel.app/api/ask", {
