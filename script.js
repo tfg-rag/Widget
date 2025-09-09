@@ -85,3 +85,13 @@ async function enviarWebhook() {
     boton.disabled = false;
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const textarea = document.getElementById('userMessage');
+  textarea.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      enviarWebhook();
+    }
+  });
+});
