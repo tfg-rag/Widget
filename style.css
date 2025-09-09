@@ -70,7 +70,7 @@ html, body {
 }
 
 .chat-input {
-  padding: 1.2em 1.6em 1.6em 1.6em;
+  padding: 1.2em 1.6em 0.8em 1.6em;
   background-color: #f0edea;
   display: flex;
   flex-direction: column;
