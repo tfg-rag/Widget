@@ -45,7 +45,7 @@ html, body {
 
 .pregunta-box {
   display: none;
-  background-color: #f0edea;
+  background-color: #e6e2de;
   color: #666;
   padding: 0.8em 1.2em;
   font-size: 0.95em;
@@ -56,7 +56,7 @@ html, body {
 
 #resultado {
   display: none;
-  background-color: #f0edea;
+  background-color: #e6e2de;
   color: #2c2c2c;
   padding: 1.2em 1.6em;
   font-size: 0.95em;
@@ -71,7 +71,7 @@ html, body {
 
 .chat-input {
   padding: 1em 1.6em 0.2em 1.6em;
-  background-color: #f0edea;
+  background-color: #e6e2de;
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -113,7 +113,7 @@ button:hover {
 
 .pensando-box {
   display: none;
-  background-color: #f0edea;
+  background-color: #e6e2de;
   color: #666;
   padding: 0.8em 1.2em;
   font-size: 0.95em;
