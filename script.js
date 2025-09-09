@@ -16,6 +16,7 @@ async function enviarWebhook() {
   const textarea = document.getElementById('userMessage');
   const mensajeRaw = textarea.value.trim();
   if (!mensajeRaw) return;
+  textarea.value = "";
 
   const mensaje = mensajeRaw;
   const intro = document.getElementById('intro');
@@ -51,13 +52,8 @@ async function enviarWebhook() {
   try {
     const response = await fetch("https://widget-rag.vercel.app/api/ask", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-        },
-      body: JSON.stringify({
-        chatInput: mensaje,
-        sessionId: "12345"
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chatInput: mensaje, sessionId: "12345" })
     });
 
     const rawText = await response.text();
@@ -72,13 +68,11 @@ async function enviarWebhook() {
     resultado.style.display = "block";
     pregunta.textContent = "La información devuelta es posible que esté desactualizada a día de hoy";
 
-    const enlaceEncuesta = `
+    encuesta.innerHTML = `
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSffcgLsrBfUkZ2xY5amLMbb-CyKKzkSMQbx1Xsgrde0zZwP7Q/viewform?usp=dialog" target="_blank">
         Déjanos tu opinión completando esta encuesta
       </a>
     `;
-    encuesta.innerHTML = enlaceEncuesta;
-
   } catch (error) {
     clearInterval(pensandoInterval);
     pensandoInterval = null;
@@ -89,7 +83,5 @@ async function enviarWebhook() {
     resultado.style.display = "block";
   } finally {
     boton.disabled = false;
-    textarea.value = "";
   }
 }
-
