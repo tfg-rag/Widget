@@ -16,7 +16,13 @@ html, body {
   flex-direction: column;
   justify-content: space-between;
   padding-top: 8px;
-  background-color: #faf9f7;
+  background-image: url("fondo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 8px 16px 16px;
 }
 
 .widget-container {
@@ -145,12 +151,6 @@ button:hover {
   box-sizing: border-box;
 }
 
-#widget-root {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 8px 16px 16px;
-}
-
 .intro-text,
 .pregunta-box,
 #resultado,
@@ -174,3 +174,4 @@ textarea#userMessage {
     max-width: calc(100vw - 24px);
   }
 }
+
